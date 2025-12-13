@@ -44,6 +44,11 @@ export function HowToPlayModal({
           </Text>
 
           <View className="mb-4">
+            <Text className="text-appText font-semibold mb-2">Rules</Text>
+            <Text className="text-appTextSecondary mb-1">🔁 You can only reuse the same word up to 3 times in a game.</Text>
+          </View>
+
+          <View className="mb-4">
             <Text className="text-appText font-semibold mb-2">Feedback colors</Text>
             <Text className="text-appTextSecondary mb-1">🟩 Green — letter matches at the same position</Text>
             <Text className="text-appTextSecondary mb-1">🟨 Yellow — letter exists in both, different positions</Text>

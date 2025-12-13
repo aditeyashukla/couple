@@ -8,6 +8,7 @@ import { Copy, PlusCircle, RotateCcw } from "lucide-react-native";
 import { RootStackParamList } from "../navigation/types";
 import { useGame } from "../hooks/useGame";
 import { STORAGE_KEYS } from "../constants/storageKeys";
+import { MAX_WORD_REUSES_PER_PLAYER } from "../constants/gameRules";
 import type { PlayerRole } from "../types/game";
 import { sanitizeWordInput, validateWord } from "../utils/wordValidation";
 import { joinGame, resetGame, submitWord } from "../firebase/gameApi";
@@ -64,6 +65,17 @@ export default function GameScreen({ route, navigation }: Props) {
     scrollRef.current?.scrollToEnd({ animated: true });
   }, [game?.currentTurn, game?.turns]);
 
+  const countWordUsesByMe = (candidate: string) => {
+    if (!role || !game?.turns) return 0;
+    const normalized = candidate.toUpperCase();
+    return Object.values(game.turns).reduce((count, turn) => {
+      const submission = turn?.[role];
+      if (!submission?.submitted) return count;
+      const submittedWord = String(submission.word || "").toUpperCase();
+      return submittedWord === normalized ? count + 1 : count;
+    }, 0);
+  };
+
   const copyCode = async () => {
     await Clipboard.setStringAsync(gameCode);
     Alert.alert("Copied", `Game code ${gameCode} copied to clipboard.`);
@@ -84,6 +96,12 @@ export default function GameScreen({ route, navigation }: Props) {
 
     if (!validateWord(cleaned)) {
       setErrorMessage("Not a valid 5-letter word. Try another!");
+      return;
+    }
+
+    const previousUses = countWordUsesByMe(cleaned);
+    if (previousUses >= MAX_WORD_REUSES_PER_PLAYER) {
+      setErrorMessage(`You can only use the same word ${MAX_WORD_REUSES_PER_PLAYER} times in a game.`);
       return;
     }
 

@@ -1,8 +1,8 @@
-# couple - Wordle for two
+# COUPLE - Wordle for two
 
 ## Project Overview
 
-couple is a multiplayer word guessing game where two players work together to find a common 5-letter word. Unlike traditional Wordle, players don't know the target word—they discover it by comparing their guesses with each other.
+Couple is a multiplayer word guessing game where two players work together to find a common 5-letter word. Unlike traditional Wordle, players don't know the target word—they discover it by comparing their guesses with each other.
 
 ## Game rules
 
