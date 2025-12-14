@@ -31,7 +31,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Compute public URL for Pages
+        id: pages-url
+        run: |
+          OWNER="${{ github.repository_owner }}"
+          REPO="${{ github.event.repository.name }}"
+          if [ "$REPO" = "${OWNER}.github.io" ]; then
+            PUBLIC_URL="https://${OWNER}.github.io"
+          else
+            PUBLIC_URL="https://${OWNER}.github.io/${REPO}"
+          fi
+          echo "PUBLIC_URL=$PUBLIC_URL" >> "$GITHUB_OUTPUT"
+          echo "Using PUBLIC_URL=$PUBLIC_URL"
+
       - name: Build web output
+        env:
+          EXPO_PUBLIC_URL: ${{ steps.pages-url.outputs.PUBLIC_URL }}
         run: npm run build
 
       - name: Upload Pages artifact
