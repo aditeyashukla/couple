@@ -146,7 +146,7 @@ export default function GameScreen({ route, navigation }: Props) {
   if (loading && !game) {
     return (
       <View className="flex-1 bg-appBg items-center justify-center">
-        <Text className="text-appTextSecondary">Loading…</Text>
+        <Text className="text-appTextSecondary font-dmsans">Loading…</Text>
       </View>
     );
   }
@@ -154,8 +154,8 @@ export default function GameScreen({ route, navigation }: Props) {
   if (!game) {
     return (
       <View className="flex-1 bg-appBg px-6 pt-16">
-        <Text className="text-appText text-xl font-bold mb-2">Game not found</Text>
-        <Text className="text-appTextSecondary mb-6">That code doesn’t exist (or was deleted).</Text>
+        <Text className="text-appText text-xl font-dmsansBold mb-2">Game not found</Text>
+        <Text className="text-appTextSecondary font-dmsans mb-6">That code doesn’t exist (or was deleted).</Text>
         {errorMessage ? (
           <View className="mb-6">
             <ErrorBanner message={errorMessage} onDismiss={() => setErrorMessage(null)} />
@@ -170,21 +170,21 @@ export default function GameScreen({ route, navigation }: Props) {
   if (game.status === "waiting") {
     return (
       <View className="flex-1 bg-appBg px-6 pt-16">
-        <Text className="text-appText text-2xl font-bold mb-1">Waiting for opponent</Text>
-        <Text className="text-appTextSecondary mb-8">Share this code with your friend:</Text>
+        <Text className="text-appText text-2xl font-dmsansBold mb-1">Waiting for opponent</Text>
+        <Text className="text-appTextSecondary font-dmsans mb-8">Share this code with your friend:</Text>
 
         <Pressable onPress={copyCode} className="bg-appSurface border border-appBorder rounded-2xl py-6 items-center">
-          <Text className="text-appText text-5xl font-extrabold tracking-widest">{gameCode}</Text>
+          <Text className="text-appText text-5xl font-dmsansBold tracking-widest">{gameCode}</Text>
           <View className="flex-row items-center mt-3">
             <Copy size={18} color="#818384" />
-            <Text className="text-appTextSecondary ml-2">Tap to copy</Text>
+            <Text className="text-appTextSecondary font-dmsans ml-2">Tap to copy</Text>
           </View>
         </Pressable>
 
         <View className="mt-10 bg-appSurface border border-appBorder rounded-2xl p-4">
-          <Text className="text-appTextSecondary">You are</Text>
-          <Text className="text-appText text-xl font-bold mt-1">{role ? (role === "playerA" ? "Player A" : "Player B") : "…"}</Text>
-          <Text className="text-appTextSecondary mt-2">The game starts automatically when Player B joins.</Text>
+          <Text className="text-appTextSecondary font-dmsans">You are</Text>
+          <Text className="text-appText text-xl font-dmsansBold mt-1">{role ? (role === "playerA" ? "Player A" : "Player B") : "…"}</Text>
+          <Text className="text-appTextSecondary font-dmsans mt-2">The game starts automatically when Player B joins.</Text>
         </View>
 
         <View className="mt-auto mb-10">
@@ -194,7 +194,7 @@ export default function GameScreen({ route, navigation }: Props) {
             </View>
           ) : null}
           <Pressable onPress={onNewGame} className="mt-4 items-center">
-            <Text className="text-appTextSecondary">Leave & start over</Text>
+            <Text className="text-appTextSecondary font-dmsans">Leave & start over</Text>
           </Pressable>
         </View>
       </View>
@@ -210,11 +210,11 @@ export default function GameScreen({ route, navigation }: Props) {
   if (game.status === "completed") {
     return (
       <View className="flex-1 bg-appBg px-4 pt-14">
-        <Text className="text-appText text-3xl font-extrabold text-center">
+        <Text className="text-appText text-3xl font-dmsansBold text-center">
           {game.result === "win" ? "🎉 YOU WIN!" : "😔 GAME OVER"}
         </Text>
 
-        <Text className="text-appTextSecondary text-center mt-2 mb-6">
+        <Text className="text-appTextSecondary font-dmsans text-center mt-2 mb-6">
           {game.result === "win"
             ? `Both found: ${game.winningWord ?? ""} in ${game.currentTurn} turns`
             : "You ran out of turns (10/10) without matching."}
@@ -246,7 +246,7 @@ export default function GameScreen({ route, navigation }: Props) {
               disabled={busy}
             >
               <RotateCcw size={18} color="#ffffff" />
-              <Text className="text-appText font-semibold ml-2">Play Again</Text>
+              <Text className="text-appText font-dmsansBold ml-2">Play Again</Text>
             </Pressable>
 
             <View className="w-3" />
@@ -257,7 +257,7 @@ export default function GameScreen({ route, navigation }: Props) {
               disabled={busy}
             >
               <PlusCircle size={18} color="#ffffff" />
-              <Text className="text-appText font-semibold ml-2">New Game</Text>
+              <Text className="text-appText font-dmsansBold ml-2">New Game</Text>
             </Pressable>
           </View>
         </View>
@@ -271,18 +271,18 @@ export default function GameScreen({ route, navigation }: Props) {
       <View className="px-4 pt-12 pb-3 border-b border-appBorder bg-appSurface">
         <View className="flex-row items-center justify-between">
           <Pressable onPress={copyCode} className="flex-row items-center">
-            <Text className="text-appText font-extrabold tracking-widest mr-2">{gameCode}</Text>
+            <Text className="text-appText font-dmsansBold tracking-widest mr-2">{gameCode}</Text>
             <Copy size={16} color="#818384" />
           </Pressable>
-          <Text className="text-appTextSecondary">Turn {game.currentTurn}/10</Text>
+          <Text className="text-appTextSecondary font-dmsansBold">Turn {game.currentTurn}/10</Text>
         </View>
-        <Text className="text-appTextSecondary mt-1">
+        <Text className="text-appTextSecondary font-dmsans mt-1">
           You are {role ? (role === "playerA" ? "Player A" : "Player B") : "…"}
         </Text>
       </View>
 
       <View className="px-4 py-3">
-        <Text className="text-appTextSecondary">{statusText}</Text>
+        <Text className="text-appTextSecondary font-dmsans">{statusText}</Text>
       </View>
 
       <ScrollView
@@ -316,19 +316,19 @@ export default function GameScreen({ route, navigation }: Props) {
             maxLength={5}
             placeholder="ENTER WORD"
             placeholderTextColor="#666"
-            className={`flex-1 bg-appBg border border-appBorder rounded-xl px-4 py-3 text-appText font-bold tracking-widest text-lg ${canType ? "" : "opacity-50"}`}
+            className={`flex-1 bg-appBg border border-appBorder rounded-xl px-4 py-3 text-appText font-dmsansBold tracking-widest text-lg ${canType ? "" : "opacity-50"}`}
           />
           <Pressable
             onPress={onSubmit}
             disabled={!readyToSubmit}
             className={`ml-3 px-4 py-3 rounded-xl ${readyToSubmit ? "bg-pairGreen" : "bg-appBorder opacity-50"}`}
           >
-            <Text className="text-appText font-semibold">Submit</Text>
+            <Text className="text-appText font-dmsansBold">Submit</Text>
           </Pressable>
         </View>
 
         <Pressable onPress={onNewGame} className="mt-4 items-center">
-          <Text className="text-appTextSecondary">Leave game</Text>
+          <Text className="text-appTextSecondary font-dmsans">Leave game</Text>
         </Pressable>
 
         {errorMessage ? (

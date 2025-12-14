@@ -31,7 +31,7 @@ export function FeedbackBoxes({ word = "", feedback, hidden = false, placeholder
             key={i}
             className={`w-11 h-11 mr-2 border-2 rounded-md items-center justify-center ${colorClass}`}
           >
-            <Text className="text-appText font-bold text-lg">
+            <Text className="text-appText font-dmsansBold text-lg">
               {hidden ? placeholder : letters[i]?.trim() ?? ""}
             </Text>
           </View>
