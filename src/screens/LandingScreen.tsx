@@ -88,9 +88,9 @@ export default function LandingScreen({ navigation }: Props) {
         }}
       />
 
-      <View className="mb-10">
-        <Text className="text-appText text-4xl font-extrabold tracking-widest">COUPLE</Text>
-        <Text className="text-appTextSecondary mt-2 text-base">
+      <View className="mb-10 items-center">
+        <Text className="text-appText text-4xl font-extrabold tracking-widest text-center">COUPLE</Text>
+        <Text className="text-appTextSecondary mt-2 text-base text-center">
           Cooperative Wordle — converge on the same 5‑letter word together.
         </Text>
       </View>
@@ -133,6 +133,10 @@ export default function LandingScreen({ navigation }: Props) {
         <HelpCircle size={18} color="#818384" />
         <Text className="text-appTextSecondary ml-2">How to Play</Text>
       </Pressable>
+
+      <View className="mt-10 items-end">
+        <Text className="text-appTextSecondary text-right">Made by Aditeya Shukla, 2025</Text>
+      </View>
     </View>
   );
 }
