@@ -88,9 +88,9 @@ export default function LandingScreen({ navigation }: Props) {
         }}
       />
 
-      <View className="mb-10">
-        <Text className="text-appText text-4xl font-extrabold tracking-widest">COUPLE</Text>
-        <Text className="text-appTextSecondary mt-2 text-base">
+      <View className="mb-10 items-center">
+        <Text className="text-appText text-4xl font-dmsansBold tracking-widest text-center">COUPLE</Text>
+        <Text className="text-appTextSecondary font-dmsans mt-2 text-base text-center">
           Cooperative Wordle — converge on the same 5‑letter word together.
         </Text>
       </View>
@@ -98,11 +98,11 @@ export default function LandingScreen({ navigation }: Props) {
       <PrimaryButton title="Create Game" onPress={onCreate} loading={creating} />
 
       <View className="my-10">
-        <Text className="text-appTextSecondary text-center">OR</Text>
+        <Text className="text-appTextSecondary font-dmsans text-center">OR</Text>
       </View>
 
       <View className="bg-appSurface rounded-2xl p-4 border border-appBorder">
-        <Text className="text-appTextSecondary mb-2">Join with code</Text>
+        <Text className="text-appTextSecondary font-dmsans mb-2">Join with code</Text>
         <TextInput
           value={joinCode}
           onChangeText={(t) => {
@@ -113,7 +113,7 @@ export default function LandingScreen({ navigation }: Props) {
           placeholderTextColor="#666"
           keyboardType="number-pad"
           maxLength={4}
-          className="text-appText text-2xl font-bold tracking-widest text-center py-3 border border-appBorder rounded-xl mb-4"
+          className="text-appText text-2xl font-dmsansBold tracking-widest text-center py-3 border border-appBorder rounded-xl mb-4"
         />
         <PrimaryButton
           title="Join Game"
@@ -131,8 +131,12 @@ export default function LandingScreen({ navigation }: Props) {
 
       <Pressable onPress={() => setShowHowTo(true)} className="mt-6 flex-row items-center justify-center">
         <HelpCircle size={18} color="#818384" />
-        <Text className="text-appTextSecondary ml-2">How to Play</Text>
+        <Text className="text-appTextSecondary font-dmsans ml-2">How to Play</Text>
       </Pressable>
+
+      <View className="mt-10 items-end">
+        <Text className="text-appTextSecondary font-dmsans text-right">Made by Aditeya Shukla, 2025</Text>
+      </View>
     </View>
   );
 }

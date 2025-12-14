@@ -19,15 +19,15 @@ export function TurnRow({ turnNumber, turn, yourRole, gameEnded }: Props) {
 
   return (
     <View className="mb-5">
-      <Text className="text-appTextSecondary mb-2">Turn {turnNumber}</Text>
+      <Text className="text-appTextSecondary font-dmsansBold mb-2">Turn {turnNumber}</Text>
 
       <View className="flex-row items-center mb-2">
-        <Text className="text-appTextSecondary w-14">YOU:</Text>
+        <Text className="text-appTextSecondary font-dmsansBold w-14">YOU:</Text>
         <FeedbackBoxes word={your?.word} feedback={your?.feedback} />
       </View>
 
       <View className="flex-row items-center">
-        <Text className="text-appTextSecondary w-14">THEM:</Text>
+        <Text className="text-appTextSecondary font-dmsansBold w-14">THEM:</Text>
 
         {gameEnded ? (
           <FeedbackBoxes word={opp?.word} feedback={opp?.feedback} />
@@ -39,12 +39,12 @@ export function TurnRow({ turnNumber, turn, yourRole, gameEnded }: Props) {
               {oppSubmitted ? (
                 <>
                   <Check size={16} color="#28a745" />
-                  <Text className="text-appTextSecondary ml-1">Submitted</Text>
+                  <Text className="text-appTextSecondary font-dmsans ml-1">Submitted</Text>
                 </>
               ) : (
                 <>
                   <Clock size={16} color="#ffc107" />
-                  <Text className="text-appTextSecondary ml-1">Waiting…</Text>
+                  <Text className="text-appTextSecondary font-dmsans ml-1">Waiting…</Text>
                 </>
               )}
             </View>

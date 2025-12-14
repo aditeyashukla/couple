@@ -13,7 +13,7 @@ export function ErrorBanner({ message, onDismiss }: Props) {
   return (
     <View className="self-start flex-row items-center px-1 py-1">
       <AlertCircle size={18} color="#c9b458" />
-      <Text className="ml-2" style={{ color: "#c9b458", flexShrink: 1 }}>
+      <Text className="ml-2 font-dmsans" style={{ color: "#c9b458", flexShrink: 1 }}>
         {message}
       </Text>
       {onDismiss ? (

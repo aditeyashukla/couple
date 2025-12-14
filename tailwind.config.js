@@ -4,6 +4,10 @@ module.exports = {
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
+      fontFamily: {
+        dmsans: "DMSans_400Regular",
+        dmsansBold: "DMSans_700Bold",
+      },
       colors: {
         appBg: "#121213",
         appSurface: "#1a1a1b",

@@ -3,6 +3,7 @@ import { db } from "./config";
 import { generateGameCode } from "../utils/gameCode";
 import { calculateFeedback } from "../utils/feedback";
 import type { Game, PlayerRole, TurnData } from "../types/game";
+import { MAX_WORD_REUSES_PER_PLAYER } from "../constants/gameRules";
 
 const gameRef = (code: string) => ref(db, `games/${code}`);
 
@@ -97,11 +98,13 @@ export async function submitWord(gameCode: string, player: PlayerRole, word: str
 
   let inactive = false;
   let updated = false;
+  let repeatLimitExceeded = false;
   const result = await runTransaction(
     gameRef(gameCode),
     (current: any) => {
       inactive = false;
       updated = false;
+      repeatLimitExceeded = false;
 
       if (!current) {
         return current; // let server retry with fresh data if it exists
@@ -134,6 +137,18 @@ export async function submitWord(gameCode: string, player: PlayerRole, word: str
 
       const alreadySubmitted = turn[player]?.submitted;
       if (alreadySubmitted) return current;
+
+      const wordReuseCount = Object.values(current.turns ?? {}).reduce((count, t: any) => {
+        const submission = t?.[player];
+        if (!submission?.submitted) return count;
+        const submittedWord = String(submission.word || "").trim().toUpperCase();
+        return submittedWord === normalized ? count + 1 : count;
+      }, 0);
+
+      if (wordReuseCount >= MAX_WORD_REUSES_PER_PLAYER) {
+        repeatLimitExceeded = true;
+        return current;
+      }
 
       turn[player] = {
         word: normalized,
@@ -192,6 +207,7 @@ export async function submitWord(gameCode: string, player: PlayerRole, word: str
 
   const snapVal = result.snapshot.val();
   if (!result.snapshot.exists()) throw new Error("Game not found. Check the code and try again.");
+  if (repeatLimitExceeded) throw new Error(`You can only use the same word ${MAX_WORD_REUSES_PER_PLAYER} times in a game.`);
   if (!result.committed) throw new Error("Could not submit word. Try again.");
   if (!updated && inactive) throw new Error("Game is no longer active.");
 }

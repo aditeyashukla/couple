@@ -1,0 +1,1 @@
+export const MAX_WORD_REUSES_PER_PLAYER = 3;

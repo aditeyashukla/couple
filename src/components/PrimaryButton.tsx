@@ -29,7 +29,7 @@ export function PrimaryButton({
       {loading ? (
         <ActivityIndicator color="#ffffff" />
       ) : (
-        <Text className="text-appText font-semibold text-base">{title}</Text>
+        <Text className="text-appText font-dmsansBold text-base">{title}</Text>
       )}
     </Pressable>
   );
